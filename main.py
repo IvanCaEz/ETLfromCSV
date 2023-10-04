@@ -74,22 +74,11 @@ def ex_2():
             jugadors[atributs[4]].append(pes)
             jugadors[atributs[5]].append(edat)
             #jugadors[f"Jugador{i}"] = str(Jugador(nom, equip, posicio, alçada, pes, edat))
-       
+            writer = csv.DictWriter(csvfile, fieldnames=jugadors.keys(), delimiter='^')
+            writer.writeheader()
+            writer.writerows(jugadors)
            # spamwriter.writerow(jugadors.values)
         #jugadors["Nom"][i],jugadors["Equip"][i],jugadors["Posicio"][i],jugadors["Alçada"][i],jugadors["Pes"][i],jugadors["Edat"][i]
-        print(jugadors)
         
 ex_2()
 
-
-"""jugador = {
-                    atributs[0] : nom,
-                    atributs[1] : equip,
-                    atributs[2] : posicio,
-                    atributs[3] : alçada,
-                    atributs[4] : pes,
-                    atributs[5] : edat,
-                    }
-                """
-                
-                #jugadors[nom] = Jugador(nom, equip, posicio, alçada, pes, edat)
