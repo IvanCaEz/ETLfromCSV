@@ -41,6 +41,7 @@ def write_to_csv(jugadors: dict, atributs):
         writer = csv.DictWriter(csvfile, fieldnames=atributs, delimiter='^')
         writer.writeheader()
         for i, row in enumerate(jugadors["Nom"]):
+            # Creem un row amb aquest format per després afegir-ho al writer i que ho escrigui al csv
             row_to_add = {
                 atributs[0] : jugadors[atributs[0]][i],
                 atributs[1]: jugadors[atributs[1]][i],
@@ -51,8 +52,6 @@ def write_to_csv(jugadors: dict, atributs):
             }
             writer.writerow(row_to_add)
 
-
-        
 
 def ex_2():
     with open('basket_players.csv') as csvfile:
@@ -68,6 +67,7 @@ def ex_2():
         atributs = ['Nom', 'Equip', 'Posicio', 'Alçada', 'Pes', 'Edat']
         
         for i, fila in enumerate(dades):
+            # Indexem els jugadors al diccionari
             if i != 0:
                 nom = fila[0].split(";")[0]
                 equip = fila[0].split(";")[1]
@@ -81,22 +81,9 @@ def ex_2():
                 jugadors[atributs[3]].append(alçada)
                 jugadors[atributs[4]].append(pes)
                 jugadors[atributs[5]].append(edat)
-            """else: 
-                nom = atributs[0]
-                equip = atributs[1]
-                posicio = atributs[2]
-                alçada = atributs[3]
-                pes = atributs[4]
-                edat = atributs[5]"""
-            
-            #jugadors[f"Jugador{i}"] = str(Jugador(nom, equip, posicio, alçada, pes, edat))
-        
-        print(len(jugadors["Nom"]))
+
+        #Cridem a la funció que crearà i afegirà les dades al nou csv
         write_to_csv(jugadors, atributs)
-                
-            
-           # spamwriter.writerow(jugadors.values)
-        #jugadors["Nom"][i],jugadors["Equip"][i],jugadors["Posicio"][i],jugadors["Alçada"][i],jugadors["Pes"][i],jugadors["Edat"][i]
-        
+
 ex_2()
 
