@@ -36,6 +36,21 @@ def traduct_pos(posicio) -> str:
     return posicio
 
 
+def write_to_csv(jugadors: dict, atributs):
+    with open('jugadors_basket.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=atributs, delimiter='^')
+        writer.writeheader()
+        for i, row in enumerate(jugadors["Nom"]):
+            row_to_add = {
+                atributs[0] : jugadors[atributs[0]][i],
+                atributs[1]: jugadors[atributs[1]][i],
+                atributs[2]: jugadors[atributs[2]][i],
+                atributs[3]: jugadors[atributs[3]][i],
+                atributs[4]: jugadors[atributs[4]][i],
+                atributs[5]: jugadors[atributs[5]][i]
+            }
+            writer.writerow(row_to_add)
+
 
         
 
@@ -60,23 +75,26 @@ def ex_2():
                 alçada = str(round(float(fila[0].split(";")[3])*POLZ_TO_CM, 2))
                 pes = str(round(float(fila[0].split(";")[4])*POUND_TO_KG,2))
                 edat = str(round(float(fila[0].split(";")[5])))
-            else: 
+                jugadors[atributs[0]].append(nom)
+                jugadors[atributs[1]].append(equip)
+                jugadors[atributs[2]].append(posicio)
+                jugadors[atributs[3]].append(alçada)
+                jugadors[atributs[4]].append(pes)
+                jugadors[atributs[5]].append(edat)
+            """else: 
                 nom = atributs[0]
                 equip = atributs[1]
                 posicio = atributs[2]
                 alçada = atributs[3]
                 pes = atributs[4]
-                edat = atributs[5]
-            jugadors[atributs[0]].append(nom)
-            jugadors[atributs[1]].append(equip)
-            jugadors[atributs[2]].append(posicio)
-            jugadors[atributs[3]].append(alçada)
-            jugadors[atributs[4]].append(pes)
-            jugadors[atributs[5]].append(edat)
+                edat = atributs[5]"""
+            
             #jugadors[f"Jugador{i}"] = str(Jugador(nom, equip, posicio, alçada, pes, edat))
-            writer = csv.DictWriter(csvfile, fieldnames=jugadors.keys(), delimiter='^')
-            writer.writeheader()
-            writer.writerows(jugadors)
+        
+        print(len(jugadors["Nom"]))
+        write_to_csv(jugadors, atributs)
+                
+            
            # spamwriter.writerow(jugadors.values)
         #jugadors["Nom"][i],jugadors["Equip"][i],jugadors["Posicio"][i],jugadors["Alçada"][i],jugadors["Pes"][i],jugadors["Edat"][i]
         
