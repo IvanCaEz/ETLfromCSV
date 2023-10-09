@@ -170,12 +170,23 @@ def check_edats_jugadors(diccionari_jugadors: dict):
 
 def ex3():
    diccionari_jugadors = ex_2()
-
-   print(check_jugador_mes_petit(diccionari_jugadors))
-   print(check_jugador_mes_pesat(diccionari_jugadors))
-   print(mitjana_pes_i_alçada(diccionari_jugadors))
-   print(check_jugadors_posicions(diccionari_jugadors))
-   print(check_edats_jugadors(diccionari_jugadors))
+   continuar = True
+   print("Selecciona les estadístiques que vols veure:")
+   print("1-Nom del jugador amb el pes més alt.\n2-Nom del jugador amb l’alçada més petita.\n3-Mitjana de pes i alçada de jugador per equip.\n4-Recompte de jugadors per posició.\n5-Distribució de jugadors per edat.")
+   print("6-Sortir")
+   while continuar:
+       
+       seleccio = int(input("Selecciona una opció: "))
+       match seleccio:
+           case 1: print(check_jugador_mes_petit(diccionari_jugadors))
+           case 2: print(check_jugador_mes_pesat(diccionari_jugadors))
+           case 3: print(mitjana_pes_i_alçada(diccionari_jugadors))
+           case 4: print(check_jugadors_posicions(diccionari_jugadors))
+           case 5: print(check_edats_jugadors(diccionari_jugadors))
+           case 6: 
+               print("Adéu")
+               continuar = False
+        
 
 ex3()
 
