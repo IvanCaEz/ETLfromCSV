@@ -142,6 +142,31 @@ def mitjana_pes_i_alçada(diccionari_jugadors: dict):
         peso_medio = sum(pesos) / len(pesos)
         print(f"Peso medio del equipo {equipo}: {peso_medio:.2f} kilogramos")
 
+def check_jugadors_posicions(diccionari_jugadors: dict):
+    jugadores_por_posicion = {}
+
+    for posicion in diccionari_jugadors["Posicio"]:
+        if posicion not in jugadores_por_posicion:
+            jugadores_por_posicion[posicion] = 0
+        jugadores_por_posicion[posicion] += 1
+
+    # Imprimimos el total de jugadores por posición
+    for posicion, cantidad in jugadores_por_posicion.items():
+        print(f"Total de jugadores en la posición {posicion}: {cantidad}")
+
+def check_edats_jugadors(diccionari_jugadors: dict):
+    jugadores_por_edades = {}
+
+    for edad in diccionari_jugadors["Edat"]:
+        grupo_edad = edad // 10 * 10  # Redondeamos la edad al múltiplo de 10 más cercano
+        if grupo_edad not in jugadores_por_edades:
+            jugadores_por_edades[grupo_edad] = 0
+        jugadores_por_edades[grupo_edad] += 1
+
+    # Imprimimos la distribución de jugadores por grupo de edades
+    for grupo_edad, cantidad in sorted(jugadores_por_edades.items()):
+        print(f"Jugadores en el grupo de edad {grupo_edad}-{grupo_edad+9}: {cantidad}")
+
 
 def ex3():
    diccionari_jugadors = ex_2()
@@ -149,6 +174,8 @@ def ex3():
    print(check_jugador_mes_petit(diccionari_jugadors))
    print(check_jugador_mes_pesat(diccionari_jugadors))
    print(mitjana_pes_i_alçada(diccionari_jugadors))
+   print(check_jugadors_posicions(diccionari_jugadors))
+   print(check_edats_jugadors(diccionari_jugadors))
 
 ex3()
 
