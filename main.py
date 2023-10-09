@@ -108,14 +108,39 @@ def check_jugador_mes_pesat(diccionari_jugadors: dict):
     return f"El jugador més pesat és {jugador_mes_pesat}, {pes_mes_gran}"
 
 def mitjana_pes_i_alçada(diccionari_jugadors: dict):
-    pes = 0.0
-    alçada = 0.0
-    for i in diccionari_jugadors["Alçada"]:
-        alçada += float(i)
-    
-    for i in diccionari_jugadors["Pes"]:
-        pes += float(i)
-    print(pes, alçada)
+    alturas_por_equipo = {}
+
+    for i in range(len(diccionari_jugadors["Nom"])):
+        equipo = diccionari_jugadors["Equip"][i]
+        altura = float(diccionari_jugadors["Alçada"][i])
+
+        if equipo not in alturas_por_equipo:
+            alturas_por_equipo[equipo] = []
+
+            alturas_por_equipo[equipo].append(altura)
+
+    # Calculamos la altura media para cada equipo
+    for equipo, alturas in alturas_por_equipo.items():
+                altura_media = sum(alturas) / len(alturas)
+                print(f"Altura media del equipo {equipo}: {altura_media:.2f} centímetros")
+
+
+
+    pesos_por_equipo = {}
+
+    for i in range(len(diccionari_jugadors["Nom"])):
+        equipo = diccionari_jugadors["Equip"][i]
+        peso = float(diccionari_jugadors["Pes"][i])
+
+        if equipo not in pesos_por_equipo:
+            pesos_por_equipo[equipo] = []
+
+        pesos_por_equipo[equipo].append(peso)
+
+    # Calculamos el peso medio para cada equipo
+    for equipo, pesos in pesos_por_equipo.items():
+        peso_medio = sum(pesos) / len(pesos)
+        print(f"Peso medio del equipo {equipo}: {peso_medio:.2f} kilogramos")
 
 
 def ex3():
