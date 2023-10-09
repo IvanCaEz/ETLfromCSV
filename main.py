@@ -51,9 +51,10 @@ def write_to_csv(jugadors: dict, atributs):
                 atributs[5]: jugadors[atributs[5]][i]
             }
             writer.writerow(row_to_add)
+    
 
 
-def ex_2():
+def ex_2() -> dict:
     with open('basket_players.csv') as csvfile:
         dades = csv.reader(csvfile)
         jugadors = {
@@ -72,9 +73,9 @@ def ex_2():
                 nom = fila[0].split(";")[0]
                 equip = fila[0].split(";")[1]
                 posicio = traduct_pos(fila[0].split(";")[2])
-                alçada = str(round(float(fila[0].split(";")[3])*POLZ_TO_CM, 2))
-                pes = str(round(float(fila[0].split(";")[4])*POUND_TO_KG,2))
-                edat = str(round(float(fila[0].split(";")[5])))
+                alçada = (round(float(fila[0].split(";")[3])*POLZ_TO_CM, 2))
+                pes = (round(float(fila[0].split(";")[4])*POUND_TO_KG,2))
+                edat = (round(float(fila[0].split(";")[5])))
                 jugadors[atributs[0]].append(nom)
                 jugadors[atributs[1]].append(equip)
                 jugadors[atributs[2]].append(posicio)
@@ -84,6 +85,45 @@ def ex_2():
 
         #Cridem a la funció que crearà i afegirà les dades al nou csv
         write_to_csv(jugadors, atributs)
+        return jugadors
 
-ex_2()
+def check_jugador_mes_petit(diccionari_jugadors: dict):
+    altura_mes_petita = float("inf")
+    jugador_mes_petit = ""
+    for i in diccionari_jugadors["Alçada"]:
+        if float(i) < altura_mes_petita:
+            altura_mes_petita = float(i)
+            index_jugador_mes_petit = diccionari_jugadors["Alçada"].index(i)
+            jugador_mes_petit = diccionari_jugadors["Nom"][index_jugador_mes_petit]
+    return f"El jugador més petit és {jugador_mes_petit}, {altura_mes_petita}"
+
+def check_jugador_mes_pesat(diccionari_jugadors: dict):
+    pes_mes_gran = 0
+    jugador_mes_pesat = ""
+    for i in diccionari_jugadors["Pes"]:
+        if float(i) > pes_mes_gran:
+            pes_mes_gran = float(i)
+            index_jugador_mes_pesat= diccionari_jugadors["Pes"].index(i)
+            jugador_mes_pesat = diccionari_jugadors["Nom"][index_jugador_mes_pesat]
+    return f"El jugador més pesat és {jugador_mes_pesat}, {pes_mes_gran}"
+
+def mitjana_pes_i_alçada(diccionari_jugadors: dict):
+    pes = 0.0
+    alçada = 0.0
+    for i in diccionari_jugadors["Alçada"]:
+        alçada += float(i)
+    
+    for i in diccionari_jugadors["Pes"]:
+        pes += float(i)
+    print(pes, alçada)
+
+
+def ex3():
+   diccionari_jugadors = ex_2()
+
+   print(check_jugador_mes_petit(diccionari_jugadors))
+   print(check_jugador_mes_pesat(diccionari_jugadors))
+   print(mitjana_pes_i_alçada(diccionari_jugadors))
+
+ex3()
 
