@@ -1,4 +1,5 @@
 import csv
+import json
 
 """with open('basket_players.csv') as csvfile:
     spamreader = csv.DictReader(csvfile)
@@ -167,6 +168,23 @@ def check_edats_jugadors(diccionari_jugadors: dict):
     for grupo_edad, cantidad in sorted(jugadores_por_edades.items()):
         print(f"Jugadores en el grupo de edad {grupo_edad}-{grupo_edad+9}: {cantidad}")
 
+def ex_4():
+    json_file_path = 'json_basket_players.json'
+    data = []
+    with open('basket_players.csv') as csvfile:
+        dades = csv.DictReader(csvfile, delimiter=";")
+        for i, row in enumerate(dades):
+            jugador = {
+            "Nom": row["Name"],
+            "Equip": row["Team"],
+            "Posicio": row["Position"],
+            "Alçada": float(row["Heigth"]),
+            "Pes": float(row["Weigth"]),
+            "Edat": float(row["Age"])
+            }
+            data.append(jugador)
+    with open(json_file_path, 'w') as jsonFile:
+        json.dump(data, jsonFile, indent=4)
 
 def ex3():
    diccionari_jugadors = ex_2()
@@ -175,7 +193,6 @@ def ex3():
    print("1-Nom del jugador amb el pes més alt.\n2-Nom del jugador amb l’alçada més petita.\n3-Mitjana de pes i alçada de jugador per equip.\n4-Recompte de jugadors per posició.\n5-Distribució de jugadors per edat.")
    print("6-Sortir")
    while continuar:
-       
        seleccio = int(input("Selecciona una opció: "))
        match seleccio:
            case 1: print(check_jugador_mes_petit(diccionari_jugadors))
@@ -187,6 +204,5 @@ def ex3():
                print("Adéu")
                continuar = False
         
-
-ex3()
+ex_4()
 
